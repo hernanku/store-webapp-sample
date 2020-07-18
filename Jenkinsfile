@@ -1,4 +1,7 @@
 pipeline {
+
+
+
     agent any
     tools {
         maven 'M3'
@@ -24,6 +27,16 @@ pipeline {
                     sh "ls -ltr '${env.WORKSPACE}/target'"
                 }
             }
+        }
+
+    def remote = [:]
+    remote.name = 'appDevServer'
+    remote.host = 'javad01.trulabz.com'
+    remote.user = 'devops'
+    remote.password = 'CrrocFly23'
+    remote.allowAnyHosts = true
+        stage ('Deploy to App Server') {
+            sshCommand remote: remote, command: "ls -ltr /app"
         }
     }
 }
