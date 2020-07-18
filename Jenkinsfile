@@ -5,18 +5,19 @@ pipeline {
         maven 'M3'
     }
     stages {
-        stage('Clone Repo') {
-            steps {
-                git url: 'https://github.com/hernanku/store-webapp-sample.git'
-            }
-        }
-        stage('Build') {
+        stage ('Initialize') {
             steps {
                 sh '''
-                ls -ld 'store-webapp-sample'
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
                 '''
             }
         }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
+         }
     }
 }
 
