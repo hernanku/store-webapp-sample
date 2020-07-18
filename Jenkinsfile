@@ -1,8 +1,8 @@
 pipeline {
-    agent any 
+    agent any
     tools {
-        jdk 'java-8'
         maven 'M3'
+        jdk 'java-8'
     }
     stages {
         stage ('Initialize') {
@@ -16,8 +16,9 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
-         }
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+            }
+        }
     }
 }
 
