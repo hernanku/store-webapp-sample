@@ -4,7 +4,7 @@ def remote = [:]
 remote.name = 'appDevServer'
 remote.host = 'javad01.trulabz.com'
 remote.user = 'devops'
-remote.password = 'CrrocFly23'
+remote.password = 'CrocFly23'
 remote.allowAnyHosts = true
 
 pipeline {
@@ -38,7 +38,7 @@ pipeline {
 
         stage ('Deploy to App Server') {
             steps{
-                sshCommand remote: remote, command: "ls -ltr /app"
+                sshCommand remote: remote, command: "ls -ltr /app", sudo: true
             }
         }
     }
