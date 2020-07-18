@@ -37,7 +37,9 @@ pipeline {
         }
 
         stage ('Deploy to App Server') {
-            sshCommand remote: remote, command: "ls -ltr /app"
+            steps{
+                sshCommand remote: remote, command: "ls -ltr /app"
+            }
         }
     }
 }
