@@ -1,14 +1,14 @@
 pipeline {
     agent any 
     tools {
-        maven 'M2'
+        maven 'M3'
     }
     stages {
         stage('Initialize') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2}
+                    mvn -v
                 '''
             }
         }
