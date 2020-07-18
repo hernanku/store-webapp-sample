@@ -1,6 +1,10 @@
 pipeline {
-
-
+    def remote = [:]
+    remote.name = 'appDevServer'
+    remote.host = 'javad01.trulabz.com'
+    remote.user = 'devops'
+    remote.password = 'CrrocFly23'
+    remote.allowAnyHosts = true
 
     agent any
     tools {
@@ -29,12 +33,6 @@ pipeline {
             }
         }
 
-    def remote = [:]
-    remote.name = 'appDevServer'
-    remote.host = 'javad01.trulabz.com'
-    remote.user = 'devops'
-    remote.password = 'CrrocFly23'
-    remote.allowAnyHosts = true
         stage ('Deploy to App Server') {
             sshCommand remote: remote, command: "ls -ltr /app"
         }
