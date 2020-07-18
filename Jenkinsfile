@@ -20,7 +20,8 @@ pipeline {
             }
             post {
                 success {
-                    sh "ls -ld '${env.WORKSPACE}/store-webapp-sample'"
+                    sh "ls -ltr '${env.WORKSPACE}'"
+                    sh "ls -ltr '${env.WORKSPACE}/target'"
                 }
             }
         }
