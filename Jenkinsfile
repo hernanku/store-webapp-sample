@@ -1,20 +1,20 @@
 pipeline {
     agent any 
     tools {
+        jdk 'java-8'
         maven 'M3'
     }
     stages {
-        stage('Initialize') {
+        stage('Clone Repo') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    mvn -v
-                '''
+                git url: 'https://github.com/hernanku/store-webapp-sample.git'
             }
         }
         stage('Build') {
             steps {
-                echo 'This is a minimal pipeline.'
+                sh '''
+                ls -ld 'store-webapp-sample'
+                '''
             }
         }
     }
