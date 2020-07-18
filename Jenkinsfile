@@ -18,6 +18,11 @@ pipeline {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
+            post {
+                success {
+                    sh "ls -ld '${env.WORKSPACE}/store-webapp-sample'"
+                }
+            }
         }
     }
 }
