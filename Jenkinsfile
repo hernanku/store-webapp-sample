@@ -39,6 +39,8 @@ pipeline {
         stage ('Deploy to App Server') {
             steps{
                 sshCommand remote: remote, command: "ls -ltr /apps", sudo: true
+                sshCommand remote: remote, command: "fuser -k 8080/tcp", sudo: true
+                sshRemove remote: remote, path: "/apps/store-app/*.jar"
             }
         }
     }
