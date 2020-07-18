@@ -1,11 +1,11 @@
 
 // ## Define variables
-// def remote = [:]
-// remote.name = 'appDevServer'
-// remote.host = 'javad01.trulabz.com'
-// remote.user = 'devops'
-// remote.password = 'CrrocFly23'
-// remote.allowAnyHosts = true
+def remote = [:]
+remote.name = 'appDevServer'
+remote.host = 'javad01.trulabz.com'
+remote.user = 'devops'
+remote.password = 'CrrocFly23'
+remote.allowAnyHosts = true
 
 pipeline {
 
@@ -37,13 +37,7 @@ pipeline {
         }
 
         stage ('Deploy to App Server') {
-            def remote = [:]
-            remote.name = 'appDevServer'
-            remote.host = 'javad01.trulabz.com'
-            remote.user = 'devops'
-            remote.password = 'CrrocFly23'
-            remote.allowAnyHosts = true
-                sshCommand remote: remote, command: "ls -ltr /app"
+            sshCommand remote: remote, command: "ls -ltr /app"
         }
     }
 }
