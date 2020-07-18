@@ -21,7 +21,7 @@ pipeline {
             post {
                 success {
                     sh "ls -ltr '${env.WORKSPACE}'"
-                    sh "ls -ltr '${env.WORKSPACE}/target/*.jar'"
+                    sh "ls -ltr '${env.WORKSPACE}/target'"
                 }
             }
         }
