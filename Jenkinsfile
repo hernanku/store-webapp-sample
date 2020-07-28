@@ -62,11 +62,11 @@ pipeline {
             }
         }
 
-        // stage ('Deploy to App Server') {
-        //     steps{
-        //         sh "sh pre-deploy.sh"
-        //     }
-        // }
+        stage ('Deploy to App Server') {
+            steps{
+                sh "sh pre-deploy.sh"
+            }
+        }
     }
 }
 
