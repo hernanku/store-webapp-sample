@@ -22,10 +22,10 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarServer') {
-                    sh "${scannerHome}/bin/sonar-scanner" \
+                    sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=store-app-codeCheck \
                         -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
-                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f
+                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
