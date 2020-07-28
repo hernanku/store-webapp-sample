@@ -49,15 +49,7 @@ pipeline {
             steps {
                 rtUpload (
                     serverId: 'artifact-dev',
-                    spec: '''{
-                        "files": [
-                            {
-                                "pattern": "target/*.jar",
-                                "target": "dev-java-apps/store-webapp-sample/",
-                                "props": "type=jar;status=ready"
-                            }
-                        ]
-                    }''',
+                    specPath: 'artifact-upload.json'
                 )
             }
         }
