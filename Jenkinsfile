@@ -17,18 +17,16 @@ pipeline {
         }
 
         stage('COde Quality Check SonarQube') {
+            environment {
+                scannerHome = tool 'sonar_scanner'
+            }
             steps {
-                script {
-                    def scannerHomr = tool 'sonar_scanner';
-                    withSonarQubeEnv("sonarServer") {
-                        sh "${tool(sonar_scanner)}/bin/sonar-scanner \
-                        -Dsonar.projectKey=web-app \
-                        -Dsonar.sources=. \
-                        -Dsonar.css.nodes=. \
-                        -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
-                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f"
-                    }
-                }                
+                withSonarQubeEnv('sonarServer') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
 
