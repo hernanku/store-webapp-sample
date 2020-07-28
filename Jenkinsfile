@@ -28,7 +28,7 @@ pipeline {
                         -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f \
                         -Dsonar.sources=src/main/java/ \
                         -Dsonar.language=java \
-                        -Dsonar.java.binaries=**/target/classes"
+                        -Dsonar.java.binaries=target/classes"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
