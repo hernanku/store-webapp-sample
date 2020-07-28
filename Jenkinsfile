@@ -21,9 +21,9 @@ pipeline {
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=target/classes"
                 }
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
+                // timeout(time: 2, unit: 'MINUTES') {
+                //     waitForQualityGate abortPipeline: true
+                // }
             }
         }
 
