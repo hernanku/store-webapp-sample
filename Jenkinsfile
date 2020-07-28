@@ -25,7 +25,10 @@ pipeline {
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=store-app-codeCheck \
                         -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
-                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f"
+                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f \
+                        -Dsonar.sources=src/main/java/
+                        -Dsonar.language=java
+                        -Dsonar.java.binaries=**/target/classes"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
