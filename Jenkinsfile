@@ -16,6 +16,30 @@ pipeline {
             }
         }
 
+        stage('Code checkout from github') {
+            steps {
+                git branch: 'master',
+                credentialsId: 'github_token',
+                url: 'https://github.com/hernanku/store-webapp-sample'
+            }
+        }
+
+        stage('COde Quality Check SonarQube') {
+            steps {
+                script {
+                    def scannerHomr = tool 'sonar-scanner';
+                    withSonarQubeEnv("sonarServer") {
+                        sh "${tool(sonar-scanner)}/bin/sonar-scanner \
+                        -Dsonar.projectKey=web-app \
+                        -Dsonar.sources=. \
+                        -Dsonar.css.nodes=. \
+                        -Dsonar.host.url=http://sonarqube.trulabz.com:9000 \
+                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f"
+                    }
+                }                
+            }
+        }
+
         stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
