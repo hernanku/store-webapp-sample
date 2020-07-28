@@ -19,8 +19,8 @@ pipeline {
         stage('Code checkout from github') {
             steps {
                 git branch: 'master',
-                credentialsId: 'github_token',
-                url: 'https://github.com/hernanku/store-webapp-sample'
+                    credentialsId: 'github_token',
+                    url: 'https://github.com/hernanku/store-webapp-sample'
             }
         }
 
