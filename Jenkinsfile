@@ -7,16 +7,7 @@ pipeline {
         jdk 'java-8'
     }
     stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-        }
-
-        stage('COde Quality Check SonarQube') {
+        stage('Code Quality Check with SonarQube') {
             environment {
                 scannerHome = tool 'sonar_scanner'
             }
@@ -36,7 +27,7 @@ pipeline {
             }
         }
 
-        stage ('Build') {
+        stage ('Maven Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
             }
