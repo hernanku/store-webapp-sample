@@ -4,12 +4,12 @@
     "name": "customers",
     "items": [
       {
-        "id": "robert.smith@email.com",
-        "firstName": "Robert",
+        "id": "alain.smith@email.com",
+        "firstName": "Alain",
         "lastName": "SMITH",
-        "address": "7407 Beech Street Hollis, NY 11423",
-        "deliveryAddress": "7407 Beech Street Hollis, NY 11423",
-        "password": "robbie"
+        "address": "19000 F U Street Hoetown, CA 94123",
+        "deliveryAddress": "19000 F U Street Hoetown, CA 94123",
+        "password": "fatty33"
       }
     ]
   },
