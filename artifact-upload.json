@@ -1,0 +1,9 @@
+{
+    "files": [
+        {
+            "pattern": "target/*.jar",
+            "target": "dev-java-apps/store-webapp-sample/",
+            "props": "type=jar;status=ready"
+        }
+    ]
+}

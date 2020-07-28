@@ -7,6 +7,11 @@ pipeline {
         jdk 'java-8'
     }
     stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'master', url: "https://github.com/hernanku/store-webapp-sample.git"
+            }
+        }
         stage('Code Quality Check with SonarQube') {
             environment {
                 scannerHome = tool 'sonar_scanner'
@@ -39,11 +44,28 @@ pipeline {
             // }
         }
 
-        stage ('Deploy to App Server') {
-            steps{
-                sh "sh pre-deploy.sh"
+        stage('Artifactory Upload') {
+            steps {
+                rtUpload (
+                    serverId: 'artifact-dev',
+                    spec: '''{
+                        "files": [
+                            {
+                                "pattern": "target/*.jar",
+                                "target": "dev-java-apps/store-webapp-sample/",
+                                "props": "type=jar;status=ready"
+                            }
+                        ]
+                    }''',
+                )
             }
         }
+
+        // stage ('Deploy to App Server') {
+        //     steps{
+        //         sh "sh pre-deploy.sh"
+        //     }
+        // }
     }
 }
 
