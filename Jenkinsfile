@@ -21,7 +21,7 @@ pipeline {
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=target/classes"
                 }
-                timeout(time: 10, unit: 'MINUTES') {
+                timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
@@ -31,12 +31,12 @@ pipeline {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
             }
-            post {
-                success {
-                    sh "ls -ltr '${env.WORKSPACE}'"
-                    sh "ls -ltr '${env.WORKSPACE}/target'"
-                }
-            }
+            // post {
+            //     success {
+            //         sh "ls -ltr '${env.WORKSPACE}'"
+            //         sh "ls -ltr '${env.WORKSPACE}/target'"
+            //     }
+            // }
         }
 
         stage ('Deploy to App Server') {
