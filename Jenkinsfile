@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'master', url: "https://github.com/hernanku/store-webapp-sample.git"
+                git branch: 'feature/pydeploy', url: "https://github.com/hernanku/store-webapp-sample.git"
             }
         }
         stage('Code Quality Check with SonarQube') {
@@ -19,9 +19,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarServer') {
                     sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=store-app-codeCheck \
-                        -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
-                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f \
+                        -Dsonar.projectKey=webstore-app \
+                        -Dsonar.host.url=https://sonarqube01.trulabz.com \
+                        -Dsonar.login=350f46e8450bd05bc1be70fdf9d9366eebfeb89a \
                         -Dsonar.sources=src/main/java/ \
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=target/classes \
