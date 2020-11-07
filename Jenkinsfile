@@ -14,7 +14,7 @@ pipeline {
             steps {
                 git branch: 'feature/pydeploy',
                 credentialsId: 'jenkins-github',
-                url: 'git@github.com:hernanku/store-webapp-sample.git'
+                url: 'https://github.com/hernanku/store-webapp-sample.git'
             }
         }
         stage('Code Quality Check with SonarQube') {
