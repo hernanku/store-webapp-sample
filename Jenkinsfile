@@ -28,7 +28,7 @@ pipeline {
                         sh "${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=webstore-app \
                             -Dsonar.host.url=https://sonarqube01.trulabz.com \
-                            -Dsonar.login=350f46e8450bd05bc1be70fdf9d9366eebfeb89a \
+                            -Dsonar.login=d730350485cf7cb50252ed1f66b164ed9b352661 \
                             -Dsonar.sources=src/main/java/ \
                             -Dsonar.language=java \
                             -Dsonar.java.binaries=target/classes \
