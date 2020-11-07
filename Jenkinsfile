@@ -1,8 +1,8 @@
 
 pipeline {
-    // environment {
-    //     scannerHome = tool 'sonarServer'
-    // }
+    environment {
+        scannerHome = tool 'sonar-scanner'
+    }
     agent {
         node {
             label 'linux-worker-01'
