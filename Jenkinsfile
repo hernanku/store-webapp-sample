@@ -2,7 +2,7 @@
 pipeline {
     agent {
         node {
-            label 'my-defined-label'
+            label 'linux-worker-01'
         }
     }  
     // tools {
