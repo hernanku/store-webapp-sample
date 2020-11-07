@@ -1,15 +1,7 @@
 
 pipeline {
-    agent {
-        node {
-            label 'linux-worker-01'
-        }
-    }  
-    // tools {
-    //     maven 'M3'
-    //     jdk 'java-8'
-    // }
-    stages {
+    node('linux-worker-01') {
+
         stage('Clone Repo') {
             steps {
                 git branch: 'feature/pydeploy', url: "https://github.com/hernanku/store-webapp-sample.git"
@@ -17,7 +9,7 @@ pipeline {
         }
         stage('Code Quality Check with SonarQube') {
             environment {
-                scannerHome = tool 'sonar_scanner'
+                scannerHome = tool 'sonarServer'
             }
             steps {
                 withSonarQubeEnv('sonarServer') {
@@ -35,7 +27,7 @@ pipeline {
                 // }
             }
         }
-        
+
         stage ('Maven Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
@@ -55,7 +47,7 @@ pipeline {
                 )
             }
         }
-        
+
         stage('Publish build info') {
             steps {
                 rtPublishBuildInfo (
@@ -63,11 +55,11 @@ pipeline {
                 )
             }
         }
-        
+
         stage ('Deploy to App Server') {
             steps{
                 sh "sh pre-deploy.sh"
-                        }
+            }
         }
     }
 }
