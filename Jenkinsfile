@@ -34,6 +34,7 @@ pipeline {
                 //     waitForQualityGate abortPipeline: true
                 // }
             }
+        }
         
         stage ('Maven Build') {
             steps {
@@ -45,7 +46,7 @@ pipeline {
             //         sh "ls -ltr '${env.WORKSPACE}/target'"
             //     }
             // }
-        
+        }
         stage('Artifactory Upload') {
             steps {
                 rtUpload (
@@ -53,6 +54,7 @@ pipeline {
                     specPath: 'artifact-upload.json'
                 )
             }
+        }
         
         stage('Publish build info') {
             steps {
@@ -60,15 +62,14 @@ pipeline {
                     serverId: 'artifact-dev'
                 )
             }
+        }
         
         stage ('Deploy to App Server') {
             steps{
                 sh "sh pre-deploy.sh"
-            }
+                        }
         }
     }
 }
-
-
 
 
