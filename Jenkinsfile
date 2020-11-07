@@ -12,7 +12,9 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'feature/pydeploy', url: "https://github.com/hernanku/store-webapp-sample.git"
+                git branch: 'feature/pydeploy',
+                credentialsId: 'jenkins-github',
+                url: 'git@github.com:hernanku/store-webapp-sample.git'
             }
         }
         stage('Code Quality Check with SonarQube') {
