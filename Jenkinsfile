@@ -1,8 +1,8 @@
 
 pipeline {
-    environment {
-        scannerHome = tool 'sonarServer'
-    }
+    // environment {
+    //     scannerHome = tool 'sonarServer'
+    // }
     agent {
         node {
             label 'linux-worker-01'
@@ -22,22 +22,24 @@ pipeline {
         }
         stage('Code Quality Check with SonarQube') {
             steps {
-                withSonarQubeEnv('sonarServer') {
-                    sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=webstore-app \
-                        -Dsonar.host.url=https://sonarqube01.trulabz.com \
-                        -Dsonar.login=350f46e8450bd05bc1be70fdf9d9366eebfeb89a \
-                        -Dsonar.sources=src/main/java/ \
-                        -Dsonar.language=java \
-                        -Dsonar.java.binaries=target/classes \
-                        -Dsonar.java.libraries=target/*.jar"
+                script {
+                    def sonarScanner = tool name: 'sonarServer', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withSonarQubeEnv('sonarServer') {
+                        sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=webstore-app \
+                            -Dsonar.host.url=https://sonarqube01.trulabz.com \
+                            -Dsonar.login=350f46e8450bd05bc1be70fdf9d9366eebfeb89a \
+                            -Dsonar.sources=src/main/java/ \
+                            -Dsonar.language=java \
+                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.java.libraries=target/*.jar"
+                        }
                 }
                 // timeout(time: 2, unit: 'MINUTES') {
                 //     waitForQualityGate abortPipeline: true
                 // }
             }
-        }
-        
+        }       
         stage ('Maven Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
@@ -56,8 +58,7 @@ pipeline {
                     specPath: 'artifact-upload.json'
                 )
             }
-        }
-        
+        }     
         stage('Publish build info') {
             steps {
                 rtPublishBuildInfo (
