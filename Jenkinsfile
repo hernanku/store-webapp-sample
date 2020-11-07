@@ -23,7 +23,7 @@ pipeline {
         stage('Code Quality Check with SonarQube') {
             steps {
                 script {
-                    def sonarScanner = tool name: 'sonar-scanner'
+                    def sonarScanner = tool name: 'sonarServer'
                     withSonarQubeEnv('sonarServer') {
                         sh "${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=webstore-app \
