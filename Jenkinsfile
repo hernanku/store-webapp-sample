@@ -1,5 +1,8 @@
 
 pipeline {
+    environment {
+        scannerHome = tool 'sonarServer'
+    }
     agent {
         node {
             label 'linux-worker-01'
@@ -18,9 +21,6 @@ pipeline {
             }
         }
         stage('Code Quality Check with SonarQube') {
-            environment {
-                scannerHome = tool 'sonarServer'
-            }
             steps {
                 withSonarQubeEnv('sonarServer') {
                     sh "${scannerHome}/bin/sonar-scanner \
