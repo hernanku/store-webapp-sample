@@ -23,8 +23,8 @@ pipeline {
         stage('Code Quality Check with SonarQube') {
             steps {
                 script {
-                    def sonarScanner = tool name: 'sonarServer'
-                    withSonarQubeEnv('sonarServer') {
+                    def sonarScanner = tool name: 'sonar-scanner'
+                    withSonarQubeEnv('sonar-scanner') {
                         sh "${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=webstore-app \
                             -Dsonar.host.url=https://sonarqube01.trulabz.com \
