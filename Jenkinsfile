@@ -60,20 +60,21 @@ pipeline {
         stage('Artifactory Upload') {
             steps {
                 script {
-                    def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
+                    def server = Artifactory.server url: 'artifact-dev', credentialsId: 'sonar-creads' 
                     def uploadSpec = readFile('artifact-upload.json') 
                     server.upload(uploadSpec) 
                 }
             }
         }  
 
-        // stage('Publish build info') {
-        //     steps {
-        //         rtPublishBuildInfo (
-        //             serverId: 'artifact-dev'
-        //         )
-        //     }
-        // }
+        stage('Publish build info') {
+            steps {
+                script {
+                    def buildInfo
+                    server.publishBuildInfo buildInfo
+                }
+            }
+        }
         
         // stage ('Deploy to App Server') {
         //     steps{
