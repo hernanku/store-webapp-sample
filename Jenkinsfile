@@ -50,12 +50,12 @@ pipeline {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
             }
-            // post {
-            //     success {
-            //         sh "ls -ltr '${env.WORKSPACE}'"
-            //         sh "ls -ltr '${env.WORKSPACE}/target'"
-            //     }
-            // }
+            post {
+                success {
+                    sh "ls -ltr '${env.WORKSPACE}'"
+                    sh "ls -ltr '${env.WORKSPACE}/target'"
+                }
+            }
         }
 
      
@@ -78,11 +78,11 @@ pipeline {
             }
         }
         
-        // stage ('Deploy to App Server') {
-        //     steps{
-        //         sh "sh pre-deploy.sh"
-        //                 }
-        // }
+        stage ('Deploy to App Server') {
+            steps{
+                sh "sh pre-deploy.sh"
+                        }
+        }
     }
 
     post { 
