@@ -29,10 +29,10 @@ pipeline {
                             -Dsonar.projectKey=webstore-app \
                             -Dsonar.host.url=http://sonarqube01:9000 \
                             -Dsonar.login=19178304fab43403efa5c7e7708c03ac6152b54f \
-                            -Dsonar.sources=./src \
-                            -Dsonar.language=java \
-                            -Dsonar.java.binaries=./target/classes \
-                            -Dsonar.java.libraries=target/*.jar"
+                            -Dsonar.sources=. \
+                            -Dsonar.language=java"
+                            // -Dsonar.java.libraries=target/*.jar
+                            // -Dsonar.java.binaries=./target/classes \
                         }
                 }
                 // timeout(time: 2, unit: 'MINUTES') {
