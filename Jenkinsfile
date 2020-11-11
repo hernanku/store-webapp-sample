@@ -20,26 +20,7 @@ pipeline {
                 url: 'https://github.com/hernanku/store-webapp-sample.git'
             }
         }
-        stage('Code Quality Check with SonarQube') {
-            steps {
-                script {
-                    def sonarScanner = tool name: 'sonar-scanner'
-                    withSonarQubeEnv('sonar-scanner') {
-                        sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=webstore-app \
-                            -Dsonar.host.url=http://sonarqube01:9000 \
-                            -Dsonar.login=19178304fab43403efa5c7e7708c03ac6152b54f \
-                            -Dsonar.sources=. \
-                            -Dsonar.language=java"
-                            // -Dsonar.java.libraries=target/*.jar
-                            // -Dsonar.java.binaries=./target/classes \
-                        }
-                }
-                // timeout(time: 2, unit: 'MINUTES') {
-                //     waitForQualityGate abortPipeline: true
-                // }
-            }
-        }       
+        
         stage ('Maven Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
@@ -51,6 +32,28 @@ pipeline {
             //     }
             // }
         }
+
+        stage('Code Quality Check with SonarQube') {
+            environment {
+                scannerHome = tool 'sonar_scanner'
+            }
+            steps {
+                withSonarQubeEnv('sonarServer') {
+                    sh "${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=store-app-codeCheck \
+                        -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
+                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f \
+                        -Dsonar.sources=src/main/java/ \
+                        -Dsonar.language=java \
+                        -Dsonar.java.binaries=target/classes \
+                        -Dsonar.java.libraries=target/*.jar"
+                }
+                // timeout(time: 2, unit: 'MINUTES') {
+                //     waitForQualityGate abortPipeline: true
+                // }
+            }
+        }
+     
         stage('Artifactory Upload') {
             steps {
                 rtUpload (
@@ -58,7 +61,8 @@ pipeline {
                     specPath: 'artifact-upload.json'
                 )
             }
-        }     
+        }   
+
         stage('Publish build info') {
             steps {
                 rtPublishBuildInfo (
@@ -73,6 +77,7 @@ pipeline {
                         }
         }
     }
+
     post { 
         always { 
             cleanWs()
