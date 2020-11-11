@@ -44,8 +44,8 @@ pipeline {
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=store-app-codeCheck \
                         -Dsonar.host.url=http://sonarqube01:9000 \
-                        -Dsonar.login=d6421646b431030bd7ea671b33d8a71db335da7f \
-                        -Dsonar.sources=src/main/java/ \
+                        -Dsonar.login=b74b9fa40a54037b5231a1a4bf8739127cecd5c3 \
+                        -Dsonar.sources=. \
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=target/classes \
                         -Dsonar.java.libraries=target/*.jar"
