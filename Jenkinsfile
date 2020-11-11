@@ -1,4 +1,5 @@
 def server = Artifactory.server 'artifact-dev'
+def buildInfo
 
 pipeline {
     environment {
@@ -70,7 +71,6 @@ pipeline {
         stage('Publish build info') {
             steps {
                 script {
-                    def buildInfo
                     server.publishBuildInfo buildInfo
                 }
             }
