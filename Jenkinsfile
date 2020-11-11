@@ -14,6 +14,7 @@ pipeline {
     tools {
         maven 'mvn3'
         jdk 'jdk8'
+        nodejs 'nodejs'
     }
     stages {
         stage('Clone Repo') {
