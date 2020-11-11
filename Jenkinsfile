@@ -37,7 +37,7 @@ pipeline {
                         -Dsonar.login=b74b9fa40a54037b5231a1a4bf8739127cecd5c3 \
                         -Dsonar.sources=./src/main/java \
                         -Dsonar.language=java \
-                        -Dsonar.java.binaries=target/classes \
+                        -Dsonar.java.binaries=. \
                         -Dsonar.java.libraries=target/*.jar"
                 }
                 // timeout(time: 2, unit: 'MINUTES') {
