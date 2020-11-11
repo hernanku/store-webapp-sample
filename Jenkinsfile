@@ -1,3 +1,4 @@
+def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
 
 pipeline {
     environment {
@@ -9,8 +10,6 @@ pipeline {
             label 'linux-worker-01'
         }
     }
-
-    def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
 
     tools {
         maven 'mvn3'
