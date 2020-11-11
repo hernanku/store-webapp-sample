@@ -37,10 +37,10 @@ pipeline {
 
         stage('Code Quality Check with SonarQube') {
             environment {
-                scannerHome = tool 'sonar_scanner'
+                scannerHome = tool 'sonar-scanner'
             }
             steps {
-                withSonarQubeEnv('sonarServer') {
+                withSonarQubeEnv('sonar-scanner') {
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=store-app-codeCheck \
                         -Dsonar.host.url=http://sonarqd01.trulabz.com:9000 \
