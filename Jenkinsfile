@@ -1,5 +1,3 @@
-def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
-def uploadSpec = readFile 'artifact-upload.json' 
 
 pipeline {
     environment {
@@ -61,7 +59,9 @@ pipeline {
      
         stage('Artifactory Upload') {
             steps {
-                script { 
+                script {
+                    def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
+                    def uploadSpec = readFile('artifact-upload.json') 
                     server.upload(uploadSpec) 
                 }
             }
