@@ -8,7 +8,9 @@ pipeline {
         node {
             label 'linux-worker-01'
         }
-    } 
+    }
+
+    def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creads' 
 
     tools {
         maven 'mvn3'
@@ -57,7 +59,6 @@ pipeline {
         }
      
         stage('Artifactory Upload') {
-            def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creds'
             steps {
                 rtUpload (
                     serverId: server,
