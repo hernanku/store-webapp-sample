@@ -31,7 +31,7 @@ pipeline {
                             -Dsonar.login=19178304fab43403efa5c7e7708c03ac6152b54f \
                             -Dsonar.sources=src/main/java/ \
                             -Dsonar.language=java \
-                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.java.binaries=target \
                             -Dsonar.java.libraries=target/*.jar"
                         }
                 }
