@@ -3,15 +3,17 @@ pipeline {
     environment {
         scannerHome = tool 'sonar-scanner'
     }
+
     agent {
         node {
             label 'linux-worker-01'
         }
-    }  
-    // tools {
-    //     maven 'M3'
-    //     jdk 'java-8'
-    // }
+    } 
+
+    tools {
+        maven 'mvn3'
+        jdk 'jdk8'
+    }
     stages {
         stage('Clone Repo') {
             steps {
@@ -20,7 +22,7 @@ pipeline {
                 url: 'https://github.com/hernanku/store-webapp-sample.git'
             }
         }
-        
+
         stage ('Maven Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
