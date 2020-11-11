@@ -67,13 +67,13 @@ pipeline {
             }
         }  
 
-        stage('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: 'artifact-dev'
-                )
-            }
-        }
+        // stage('Publish build info') {
+        //     steps {
+        //         rtPublishBuildInfo (
+        //             serverId: 'artifact-dev'
+        //         )
+        //     }
+        // }
         
         // stage ('Deploy to App Server') {
         //     steps{
