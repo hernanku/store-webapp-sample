@@ -57,9 +57,10 @@ pipeline {
         }
      
         stage('Artifactory Upload') {
+            def server = Artifactory.newServer url: 'artifact-dev', credentialsId: 'sonar-creds'
             steps {
                 rtUpload (
-                    serverId: 'artifact-dev',
+                    serverId: server,
                     specPath: 'artifact-upload.json'
                 )
             }
