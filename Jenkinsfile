@@ -59,10 +59,19 @@ pipeline {
      
         stage('Artifactory Upload') {
             steps {
+                script{
+                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    def server = Artifactory.server 'artifact-dev'
+                    // Read upload specs:
+                    def uploadSpec = readFile 'artifact-upload.json'
+                    // Upload files to Artifactory:
+                    // Publish the merged build-info to Artifactory
+                    server.publishBuildInfo buildInfo1
                 rtUpload (
                     serverId: server,
                     specPath: 'artifact-upload.json'
                 )
+                }
             }
         }   
 
