@@ -38,7 +38,7 @@ pipeline {
                         -Dsonar.sources=./src/main/java \
                         -Dsonar.language=java \
                         -Dsonar.java.binaries=. \
-                        -Dsonar.java.libraries=target/*.jar"
+                        -Dsonar.java.libraries=."
                 }
                 // timeout(time: 2, unit: 'MINUTES') {
                 //     waitForQualityGate abortPipeline: true
