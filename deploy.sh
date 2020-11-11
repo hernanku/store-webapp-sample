@@ -1,5 +1,5 @@
 #!/bin/sh
-serverName="devops@javad01.trulabz.com"
+serverName="devops@appserver01.trulabz.com"
 password="CrocFly23"
 
 sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$serverName" << EOF
