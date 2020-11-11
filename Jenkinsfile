@@ -1,3 +1,4 @@
+def server = Artifactory.server 'artifact-dev'
 
 pipeline {
     environment {
@@ -60,7 +61,6 @@ pipeline {
         stage('Artifactory Upload') {
             steps {
                 script {
-                    def server = Artifactory.server 'artifact-dev' 
                     def uploadSpec = readFile('artifact-upload.json') 
                     server.upload(uploadSpec) 
                 }

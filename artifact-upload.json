@@ -2,7 +2,7 @@
     "files": [
         {
             "pattern": "target/*.jar",
-            "target": "dev-java-apps",
+            "target": "store-webapp",
             "props": "type=jar;status=ready"
         }
     ]
